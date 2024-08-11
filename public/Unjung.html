@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>운정캠퍼스</title>
-    <link rel="stylesheet" href="../asset/main.css">
-    <link rel="stylesheet" href="../asset/Unjung.css">
-    <script  src="../asset/tab.js"></script> <!--자바스크립트 적용-->
+    <link rel="stylesheet" href="./asset/main.css">
+    <link rel="stylesheet" href="./asset/Unjung.css">
+    <script  src="./asset/tab.js"></script> <!--자바스크립트 적용-->
 </head>
 <body>
     <header>
@@ -28,13 +28,17 @@
     <main>
         <div class="content__inner"> <!--운캠 지도-->
             <div class="page">
-                <div class="left">
+                <div class="left" id="image-container">
+                    <img id="Adong-image" src="../asset/Adong.png" alt="A동 단면도" style="display: none;">
+                    <img id="Bdong-image" src="../asset/Bdong.png" alt="B동 단면도" style="display: none;">
+                    <img id="Cdong-image" src="../asset/Cdong.png" alt="C동 단면도" style="display: none;">
+                    <img id="Pdong-image" src="../asset/Pdong.png" alt="P동 단면도" style="display: none;">
                 </div>
                 <div class="right">
-                    <p> A동 </p>
-                    <p> B동 </p>
-                    <p> C동 </p>
-                    <p> P동 </p>
+                    <p data-image="Adong-image">A동</p>
+                    <p data-image="Bdong-image">B동</p>
+                    <p data-image="Cdong-image">C동</p>
+                    <p data-image="Pdong-image">P동</p>
                 </div>
             </div>
             <script>
@@ -72,6 +76,27 @@
                         .catch(error => console.error('Error:', error));
                     }
                 });
+
+
+                // JavaScript를 이용하여 마우스 호버 시 이미지 변경
+        document.querySelectorAll('.right p').forEach(item => {
+            item.addEventListener('mouseover', function() {
+                document.querySelectorAll('.left img').forEach(img => img.style.display = 'none');
+                const imgId = this.getAttribute('data-image');
+                const img = document.getElementById(imgId);
+                if (img) {
+                    img.style.display = 'block';
+                }
+            });
+
+            item.addEventListener('mouseout', function() {
+                const imgId = this.getAttribute('data-image');
+                const img = document.getElementById(imgId);
+                if (img) {
+                    img.style.display = 'none';
+                }
+            });
+        });
             </script>
         </div>
     </main>

@@ -1,26 +1,44 @@
-.content__inner{
-    --background: rgba(104, 161, 200, 1);
-}
-
-.page {
+/* 기본 레이아웃 설정 */
+.content__inner {
+    --background: rgba(193, 171, 255, 1);
+    border-radius: 5px;
+  }
+  
+  .page {
     display: flex;
     flex-direction: row;
-}
-
-.left{
-    width: 100%;
+  }
+  
+  /* 왼쪽 영역 스타일 */
+  .left {
+    width: 80%;
+    min-height: 600px;
     background: url(../asset/이미지/운정캠퍼스.png) 0 0 no-repeat;
     background-size: contain;
     background-position: center center;
-}
-
-.right{
-    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #building-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* 오른쪽 영역 스타일 */
+  .right {
+    width: 20%;
+    padding: 20px;
     text-align: center;
     font-size: 1.5rem;
     overflow-y: scroll;
-}
-
-.right::-webkit-scrollbar{
+  }
+  
+  .right::-webkit-scrollbar {
     display: none;
-}
+  }
+  
+  p{
+    cursor: pointer;
+  }

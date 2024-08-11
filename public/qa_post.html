@@ -18,6 +18,16 @@
         .back-button {
             margin-top: 20px;
         }
+        .communication-tab {
+            display: inline-block;
+            margin: 10px 0px;
+            padding: 0px 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #999;
+            font-size: 14px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -48,6 +58,10 @@
 
 <div class="content__inner"> <!--수정이 공간-->
     <div class="page">
+            <div class="tabs">
+                <div class="communication-tab" onclick="showTab('faq')">FAQ</div>
+                <div class="communication-tab" onclick="showTab('qa')">Q&A</div>
+            
 
     <div class="post-content">
         <h3 id="postTitle"></h3>
@@ -99,6 +113,43 @@
         function goBack() {
             window.location.href = `/view.html?tab=qa&page=${prevPage}`;
         }
+        
+        // 로그인 상태 확인
+        document.addEventListener('DOMContentLoaded', () => {
+                    const token = sessionStorage.getItem('authToken');
+                    if (token) {
+                        fetch('/users/me', {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(user => {
+                            if (user.username) {
+                                document.getElementById('signin').innerHTML = `
+                                    ${user.username}님, 반갑습니다! 
+                                    <button id="logoutButton">로그아웃</button>
+                                `;
+                                document.getElementById('logoutButton').addEventListener('click', () => {
+                                    sessionStorage.removeItem('authToken');
+                                    window.location.href = '/';
+                                });
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    }
+                });
+
+
+            function showTab(tabID) {
+            if(tabID === 'faq'){
+                window.location.href = `/view.html?tab=faq&page=${prevPage}`;
+            }else if(tabID === 'qa'){
+                window.location.href = `/view.html?tab=qa&page=${prevPage}`;
+            }
+            
+        }
+
     </script>
 </body>
 </html>

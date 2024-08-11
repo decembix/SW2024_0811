@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="../asset/write.css">
 </head>
 <body>
+    <header>
+        <div id="signin">
+            <a href="/login">회원가입/로그인</a>
+        </div>
+        <div class="logo">
+            <a href="/"><img src="asset/이미지/수룡선배 아이콘2.png" width="400px" alt="Logo"></a>
+        </div>
+        <nav class="folder">
+            <div class="tabs">
+                <a href="/Sujung" class="tab"><div><span>수정캠퍼스</span></div></a>
+                <a href="/Unjung" class="tab"><div><span>운정캠퍼스</span></div></a>
+                <a href="/Bus" class="tab"><div><span>셔틀버스</span></div></a>
+                <a href="/view" class="tab"><div><span>수정이 공간</span></div></a>
+            </div>
+        </nav>
+    </header>
+
     <h1>FAQ 작성</h1>
     <form id="faqPostForm">
         <label for="title">제목:</label><br>
@@ -34,7 +51,7 @@
             const authToken = sessionStorage.getItem('authToken');
             if (!authToken) {
                 alert('로그인이 필요합니다');
-                window.location.href = '/login.html';
+                window.location.href = '/login';
                 return;
             }
 
@@ -52,7 +69,7 @@
                     alert(data.msg);
                 } else {
                     alert('FAQ가 성공적으로 작성되었습니다!');
-                    window.location.href = '/view.html';
+                    window.location.href = '/view';
                 }
             })
             .catch((error) => {
@@ -62,9 +79,35 @@
 
         function cancelPost() {
             if (confirm('FAQ 작성을 정말 취소하시겠습니까?')) {
-                window.location.href = '/view.html';
+                window.location.href = '/view';
             }
         }
+
+        // 로그인 상태 확인
+        document.addEventListener('DOMContentLoaded', () => {
+                    const token = sessionStorage.getItem('authToken');
+                    if (token) {
+                        fetch('/users/me', {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(user => {
+                            if (user.username) {
+                                document.getElementById('signin').innerHTML = `
+                                    ${user.username}님, 반갑습니다! 
+                                    <button id="logoutButton">로그아웃</button>
+                                `;
+                                document.getElementById('logoutButton').addEventListener('click', () => {
+                                    sessionStorage.removeItem('authToken');
+                                    window.location.href = '/';
+                                });
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    }
+                });
     </script>
 </body>
 </html>

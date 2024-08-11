@@ -23,16 +23,46 @@ app.use('/posts', posts);
 app.use('/users', users);
 app.use('/faq_posts',faq_posts);
 
+
+
+app.get('/Bus', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'Bus.html'));
+});
+
+app.get('/confirm_email', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'confirm_email.html'));
+});
+
+app.get('/faq_write', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'faq_write.html'));
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get('/view', (req, res) => {  
-    res.sendFile(path.join(__dirname, 'public', 'view.html'));
-});
-
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.get('/qa_post', auth, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'qa_post.html'));
+});
+
+app.get('/register_success', (req, res) => { 
+    res.sendFile(path.join(__dirname, 'public', 'register_success.html'));
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'register.html'));
+});
+
+app.get('/reset_password', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'reset_password.html'));
+});
+
+app.get('/reset_request', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'reset_request.html'));
 });
 
 app.get('/Sujung', (req, res) => {
@@ -43,25 +73,19 @@ app.get('/Unjung', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'Unjung.html'));
 });
 
-app.get('/Bus', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'Bus.html'));
+app.get('/view', (req, res) => {  
+    res.sendFile(path.join(__dirname, 'public', 'view.html'));
 });
 
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'register.html'));
+app.get('/write', (req, res) => {  
+    res.sendFile(path.join(__dirname, 'public', 'write.html'));
 });
 
-app.get('/qa_post', auth, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'qa_post.html'));
-});
 
-app.get('/reset_request', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'reset_request.html'));
-});
 
-app.get('/reset_password', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'reset_password.html'));
-});
+
+
+
 
 
 app.listen(port, () => {

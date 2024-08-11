@@ -26,24 +26,25 @@
         </nav>
     </header>
 
-    <div class="content__inner"> <!--수정이 공간-->
-        <div class="page">
-
-    <h1>글 작성</h1>
-    <form id="postForm">
-        <label for="title">제목:</label><br>
-        <input type="text" id="title" name="title" maxlength="30" oninput="checkTitleLength()"><br>
-        <span id="titleLength">0/30</span><br><br>
-        <label for="content">내용:</label><br>
-        <textarea id="content" name="content"></textarea><br><br>
-        <input type="submit" value="작성">
-        <input type="button" value="취소" onclick="cancelPost()">
-        <p id="error-message" style="color: red; display: none;">제목과 내용을 입력해주세요.</p>
-    </form>
-
-
-</div>
-</div>
+    <main>
+        <div class="content__inner"> <!--수정이 공간-->
+            <div class="page">
+                <h1>글 작성</h1>
+                <form id="postForm">
+                    <label for="title">제목:</label><br>
+                    <input type="text" id="title" name="title" maxlength="30" oninput="checkTitleLength()"><br>
+                    <span id="titleLength">0/30</span><br><br>
+                    <label for="content">내용:</label><br>
+                    <textarea id="content" name="content"></textarea><br><br>
+                    <div class="button_wrap">
+                        <input type="submit" value="작성">
+                        <input type="button" value="취소" onclick="cancelPost()">
+                    </div>
+                    <p id="error-message" style="color: red; display: none;">제목과 내용을 입력해주세요.</p>
+                </form>
+            </div>
+        </div>
+    </main>
     <script>
         function checkTitleLength() {
             const title = document.getElementById('title');
@@ -105,6 +106,36 @@
         document.addEventListener('DOMContentLoaded', () => {
             checkTitleLength();
         });
+        
+        // 로그인 상태 확인
+        document.addEventListener('DOMContentLoaded', () => {
+                    const token = sessionStorage.getItem('authToken');
+                    if (token) {
+                        fetch('/users/me', {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(user => {
+                            if (user.username) {
+                                document.getElementById('signin').innerHTML = `
+                                    ${user.username}님, 반갑습니다! 
+                                    <button id="logoutButton">로그아웃</button>
+                                `;
+                                document.getElementById('logoutButton').addEventListener('click', () => {
+                                    sessionStorage.removeItem('authToken');
+                                    window.location.href = '/';
+                                });
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    }
+                });
+ 
+
+
+
     </script>
 </body>
 </html>

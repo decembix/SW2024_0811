@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.page{
+    font-family: 'DungGeunMo';
+    width: 100%;
+}
+
+.post-content {
+    background-color: #fff;
+}
+
+#postTitle{
+    font-size: 1.7rem;
+    margin: 0px 15px;
+    padding: 30px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+#postAuthor {
+    margin: 0 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #999;
+    font-size: 1.4rem;
+}
+
+#postContent{
+    margin: 0 20px;
+    padding: 50px 0;
+    border-bottom: 1px solid #000;
+    line-height: 160%;
+    font-size: 1.4rem;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.back-button{
+    text-align: center;
+}
+
+button{
+    font-family: 'DungGeunMo';
+    padding: 10px 20px; /* 버튼의 패딩 조정 */
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+
+    background-color: #d1d1d1;
+    color: #000000;
+}
+
+.navigation{
+    color: #2f3678;
+}

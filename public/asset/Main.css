@@ -67,6 +67,9 @@ footer{
   border-radius: 5px;
   background-color: #fff;
 }
+.content__inner{
+  border-radius: 5px;
+}  
 
 .slider {
     position: relative;
